@@ -1,0 +1,9 @@
+<!-- <p>father works!</p> -->
+
+<!-- <app-son [sonReceive]="messageToChild" (messageFromSon)="FatherReceives($event)"></app-son> -->
+<app-son (mensajeDelHijoEmmiter)="fatherReceives($event)" (inc)="incrementar()" (dec)="decrementar()"></app-son>
+
+<!-- <h5>El mensaje recibido deel hijo es {{recibido}}</h5> -->
+
+
+<p>{{valorContador}}</p>
