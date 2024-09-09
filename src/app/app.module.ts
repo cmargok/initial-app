@@ -8,6 +8,7 @@ import { SonComponent } from './son/son.component';
 import { FormsModule } from '@angular/forms';
 import { HermanoComponent } from './hermano/hermano.component';
 import { SiblingsStyleDirective } from './siblings-style.directive';
+import { MyCustomPipePipe } from './my-custom-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { SiblingsStyleDirective } from './siblings-style.directive';
     FatherComponent,
     SonComponent,
     HermanoComponent,
-    SiblingsStyleDirective
+    SiblingsStyleDirective,
+    MyCustomPipePipe
   ],
   imports: [
     BrowserModule,
