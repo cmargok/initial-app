@@ -12,21 +12,17 @@
     <tbody>
       <tr>
         <th scope="row">1</th>
-        <td>Lavandina</td>
+        <td>Anticeptioco</td>
         <td>$10</td>
-        <button type="button" class="btn btn-outline-primary" [routerLink]="['/products', 'purple', 'Lavandina']">Detalle</button>
+        <button type="button" class="btn btn-outline-primary" [routerLink]="['/products', 'Anticeptioco']">Detalle</button>
       </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Detergente</td>
-        <td>$8</td>
-        <button type="button" class="btn btn-outline-primary" [routerLink]="['/products', 'green','Detergente']">Detalle</button>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Jabon</td>
-        <td>$2</td>
-        <button type="button" class="btn btn-outline-primary" [routerLink]="['/products', 'blue', 'Jabon']">Detalle</button>
+
+
+      <tr *ngFor="let product of productsLista">
+        <th scope="row">{{product.id}}</th>
+        <td>{{product.name}}</td>
+        <td [ngClass]="{'red':product.price > 500}">{{product.price | currency}}</td>
+        <button type="button" class="btn btn-outline-primary" [routerLink]="['/products', product.id]">Detalle</button>
       </tr>
 
     </tbody>

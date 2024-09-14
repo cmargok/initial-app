@@ -1,2 +1,9 @@
-<p>product-detail works!</p>
-<h2 [ngStyle]="{'background-color': color}" > el producto seleccionado fue : {{ producto }}</h2>
+
+<ng-container *ngIf="!loading">
+    <h2> Producto: {{ producto?.name }}</h2>
+    <h2> Price: {{ producto?.price | currency}}</h2>
+    <h2 *ngIf="producto?.description"> Description: {{ producto?.description }}</h2>
+</ng-container>
+
+<ng-container *ngIf="loading">Cargando...
+</ng-container>
