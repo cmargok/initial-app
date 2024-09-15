@@ -1,12 +1,46 @@
 <div class="container">
-    <form #miFormulario="ngForm" (ngSubmit)="send()">
+    <form [formGroup]="formularioContacto" (ngSubmit)="send()">
+
+      <div class="mb-3">
+          <label for="name" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="name" formControlName="name"
+            [ngClass]="{'is-invalid':hasErrors('name', 'required') || hasErrors('name','minlength')}" >
+          <div class="text-danger" *ngIf="hasErrors('name','required')">Name is required.</div>
+          <div class="text-danger" *ngIf="hasErrors('name','minlength')">Minimum length is 3.</div>
+        </div>
+
         <div class="mb-3">
-            <label for="name" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="name" [(ngModel)]="user.name" required [ngModelOptions]="{standalone:true}">
-          </div>
+          <label for="lastName" class="form-label">lastName</label>
+          <input type="text" class="form-control" id="lastName" formControlName="lastName"
+            [ngClass]="{'is-invalid':hasErrors('lastName', 'required') || hasErrors('lastName','minlength')}">
+          <div class="text-danger" *ngIf="hasErrors('lastName','required')">lastName is required.</div>
+          <div class="text-danger" *ngIf="hasErrors('lastName','minlength')">Minimum length is 3.</div>
+        </div>
+        
+        <div class="mb-3">
+          <label for="identificationType" class="form-label">Identification type</label>
+          <select class="form-select" id="identificationType" formControlName="identificationType">
+            <option selected></option>
+            <option value="CC">CC</option>
+            <option value="CE">CE</option>
+            <option value="NIT">NIT</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="identification" class="form-label">{{typeId}}</label>
+          <input type="text" class="form-control" id="identification" formControlName="identification"
+            [ngClass]="{'is-invalid':hasErrors('identification', 'required') || hasErrors('identification','minlength')}" >
+          <div class="text-danger" *ngIf="hasErrors('identification','required')">{{typeId}} is required.</div>
+          <div class="text-danger" *ngIf="hasErrors('identification','minlength')">{{typeId}} minimum length is 3.</div>
+        </div>
+        
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="email" [(ngModel)]="user.email" required [ngModelOptions]="{standalone:true}">
+          <input type="email" class="form-control" id="email" formControlName="email"
+            [ngClass]="{'is-invalid':hasErrors('email', 'required') || hasErrors('email', 'email')}" >
+          <div class="text-danger" *ngIf="hasErrors('email', 'email')">email provided is invalid.</div>
+          <div class="text-danger" *ngIf="hasErrors('email', 'required')">email is required.</div>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
