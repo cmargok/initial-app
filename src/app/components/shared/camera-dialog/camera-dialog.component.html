@@ -1,0 +1,129 @@
+<h2 mat-dialog-title align="center" class="mt-2">Camera Helper</h2>
+
+<ng-container>
+
+    <mat-dialog-content class="mat-typography" style=" max-height: 100vh;">
+        <mat-grid-list  cols="2" rowHeight="4.7vh">
+
+            <!-- Primer Division -->
+
+            <ng-container *ngIf="firstScreen">
+                <mat-grid-tile class="mat-grid-tile-main" [rowspan]="8" (click)="selectUpload()">
+                    <div class="overlay">
+                        <p class="title">Subir Imagen</p>
+                        <div class="svg-container bi bi-cloud-arrow-up" style="font-size: 7em;"></div>
+                    </div>  
+                </mat-grid-tile>
+    
+                <mat-grid-tile class="mat-grid-tile-main" [ngStyle]="{'background-color': uploadBackGroundColor}" [rowspan]="8" (click)="selectTakeFoto()">
+
+                    <div *ngIf="!showCameraNoExist && !findCameras" class="overlay">
+                        <p class="title">Tomar Foto</p>
+                        <div class="svg-container bi bi-camera-fill" style="font-size: 7em;"></div>
+                    </div>
+
+                    <div *ngIf="findCameras" class="overlay text-center" [hidden]="!findCameras">        
+                        <div class="overlay">             
+                            <p class="title">Buscando Camaras...</p>
+                            <div class="spinner-border text-secondary" style="width: 6rem; height: 6rem;" role="status">
+                                <span class="visually-hidden">Buscando Camaras...</span>
+                            </div>     
+                        </div>                      
+                    </div>
+
+                    <div *ngIf="showCameraNoExist && !findCameras" class="overlay">
+                        <div class="overlay">
+                            <p class="title">Camara no disponible</p>
+                            <div class="svg-container bi-x-circle" style="font-size: 6em;"></div>
+                        </div>
+                    </div>
+
+                </mat-grid-tile>         
+            </ng-container>
+
+            <!-- Subir Imagen -->
+
+            <ng-container *ngIf="isUploadSelected">                           
+                <mat-grid-tile [colspan]="2" [rowspan]="8" (click)="fileInput.click()">    
+                    <div class="border-dashed select-upload" [ngStyle]="{'background-color': uploadBackGroundColor}">                        
+                        <div class="svg-container bi bi-image" style="font-size: 7.3em;"></div>   
+                        <br/>
+                        <p class="title">{{uploadFileText}} <strong>{{fileName}}</strong></p> 
+                        <input hidden type="file" id="input-file-id" #fileInput accept="image/jpeg, image/jpeg" (change)="onFileSelected($event)"/>                        
+                    </div>    
+                </mat-grid-tile>   
+            </ng-container>    
+
+            <!-- Tomar Imagen -->
+
+            <ng-container *ngIf="isTakeFotoSelected && isCameraEnable">    
+                <mat-grid-tile style="cursor: default;" [colspan]="2" [rowspan]="8">
+                    <div *ngIf="isCameraExists">
+                        <div style="text-align:center">
+                            <webcam [height]="650" [width]="750" [trigger]="triggerObservable" (initError)="handleInitError($event)" 
+                            (imageCapture)="handleImage($event)" [switchCamera]="nextWebCamObservable" *ngIf="isCameraEnable"></webcam>
+                        </div>
+                    </div>  
+                </mat-grid-tile>                   
+            </ng-container>
+
+            <ng-container *ngIf="!isCameraEnable && showFoto">
+                <mat-grid-tile style="cursor: default;" [colspan]="2" [rowspan]="8">
+                    <div  style="text-align:center">
+                        <img [src]="webcamImage?.imageAsDataUrl" alt="Imagen Capturada" />
+                    </div>
+                </mat-grid-tile>
+            </ng-container>
+          
+       </mat-grid-list>
+    </mat-dialog-content>
+
+    
+    <mat-dialog-actions align="center">
+
+        <!-- Boton Pimario de cancelar -->
+        <div class="mt-2 w-100" *ngIf="firstScreen" >
+            <div class="mt-1 text-center">                
+                <button type="button" class="btn btn-outline-danger mx-2 btn-lg title" (click)="closeDialog()"> Cancelar</button>              
+            </div>       
+        </div>    
+
+        <!-- Primer div que ocupa todo el ancho -->
+        <div class="mt-2 w-100" >
+            <div class="mt-1 text-center"> <!-- Centrar contenido -->
+
+                <button type="button" *ngIf="!firstScreen" 
+                    class="btn btn-warning mx-2 btn-lg title bi bi-arrow-left-circle" 
+                    (click)="regresar()"> Volver</button>
+
+                <button type="button" *ngIf="isCameraEnable" class="btn btn-warning btn-lg mx-2 title bi bi-arrow-repeat"                     
+                    [hidden]="!multipleWebcamsAvailable" 
+                    (click)="changeCamera(true)"> Cambiar Camara</button>
+    
+                <button type="button" *ngIf="isCameraEnable" class="btn btn-primary btn-lg mx-2 title bi bi-record-circle" 
+                    [hidden]="retryShotEnabled" 
+                    (click)="takeShot()"> Tomar Foto</button>
+    
+                <button type="button" *ngIf="showFoto" class="btn btn-warning btn-lg mx-2 title bi bi-arrow-clockwise"       
+                    [hidden]="!retryShotEnabled" 
+                    (click)="retryShot()"> Reintentar</button>
+           
+                <button type="button" *ngIf="isUploadSelected" 
+                    class="btn btn-outline-danger mx-2 btn-lg title" 
+                    (click)="closeDialog()">Cancelar</button>   
+
+                <button type="button" *ngIf="!firstScreen" 
+                    [ngClass]="{'btn-outline-secondary':isBtnImportDisabled}" class="btn btn-primary mx-2 btn-lg title bi bi-arrow-right-circle" 
+                    [disabled]="isBtnImportDisabled"  
+                    (click)="submitFile()"> Importar
+                </button>
+
+            </div> 
+        </div> 
+
+    </mat-dialog-actions>    
+    
+</ng-container>
+
+
+

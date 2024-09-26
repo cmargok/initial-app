@@ -1,0 +1,66 @@
+mat-grid-tile {
+  cursor: pointer;
+}
+
+.mat-grid-tile-main {
+    background: rgb(208, 230, 251);
+    transition: background-color 0.4s ease, transform 0.4s ease;
+}
+.mat-grid-tile-main:hover {
+  background: rgb(94, 172, 250);
+}
+
+.border-dashed {
+  border: 2px dashed #827f7f;
+}
+
+.select-upload
+{ 
+  border-radius: 5px;
+  width: 100%; 
+  height: 100%;
+  position: relative;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: background-color 0.4s ease, transform 0.4s ease;
+}
+
+.select-upload:hover {
+  background: rgba(159, 203, 246, 0.498);
+  border-radius: 4px;
+  border-color: #0b34ff;
+}
+
+.overlay {
+  position: relative; 
+  background-color: rgba(255, 255, 255, 0.305); 
+  height: 100%; 
+  width: 100%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
+}
+
+.title {
+  font-size: 1.5em;
+  margin-bottom: 10px; 
+  z-index: 2;
+}
+
+.svg-container {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 100px;
+  opacity: 0.6;
+  z-index: 1;
+}
+
+

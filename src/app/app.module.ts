@@ -7,6 +7,13 @@ import { ProductsComponent } from './products/products.component';
 import { ContactComponent } from './contact/contact.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CameraDialogComponent } from './components/shared/camera-dialog/camera-dialog.component';
+import { MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { WebcamModule } from 'ngx-webcam';
 
 @NgModule({
   declarations: [
@@ -15,13 +22,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProductsComponent,
     ContactComponent,
     ProductDetailComponent,
+    CameraDialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    NoopAnimationsModule,    
+    MatSlideToggleModule,
+    MatButtonModule, 
+    MatDialogModule,
+    BrowserModule,
+    MatGridListModule,
+    WebcamModule
+  ],  
   providers: [],
   bootstrap: [AppComponent]
 })
